@@ -1,0 +1,552 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     19358,        544]
+NotebookOptionsPosition[     16399,        488]
+NotebookOutlinePosition[     16746,        503]
+CellTagsIndexPosition[     16703,        500]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Gauss-Jordan Elimination (of Square Matrices)", "Title",
+ CellChangeTimes->{{3.7476783100741377`*^9, 3.7476783173176126`*^9}, {
+  3.747680261530877*^9, 
+  3.7476802670911026`*^9}},ExpressionUUID->"02a27a96-5861-4076-8a29-\
+9a12599406c8"],
+
+Cell[CellGroupData[{
+
+Cell["Elimination Procedure", "Chapter",
+ CellChangeTimes->{{3.747678356525216*^9, 
+  3.747678362928752*^9}},ExpressionUUID->"51ba9d02-ccf0-4022-90b6-\
+da84b0c131f9"],
+
+Cell[TextData[{
+ "For notation purposes, we are given a matrix A that we want to row reduce. \
+For this program, we don\[CloseCurlyQuote]t require the coefficient matrix to \
+be non-singular, but we do not handle cases where row swaps are required. If \
+the coefficient matrix is ",
+ StyleBox["m",
+  FontSlant->"Italic"],
+ "-by-",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ ", the matrix A is an augmented matrix of dimensions ",
+ StyleBox["m",
+  FontSlant->"Italic"],
+ "-by-",
+ StyleBox["(n+1)",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.7476783642692375`*^9, 3.747678491766588*^9}, {
+  3.7476786967943215`*^9, 3.747678725693797*^9}, {3.7476797654982657`*^9, 
+  3.747679812445077*^9}, {3.7476805767411175`*^9, 
+  3.7476806135931783`*^9}},ExpressionUUID->"f8171a31-1e41-4378-9987-\
+a6f6f703d1fb"],
+
+Cell[TextData[{
+ "For later, we define the operation \[OpenCurlyDoubleQuote]safe division\
+\[CloseCurlyDoubleQuote] on two operands ",
+ StyleBox["a",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["b",
+  FontSlant->"Italic"],
+ " to be as follows:"
+}], "Text",
+ CellChangeTimes->{{3.747678734917455*^9, 
+  3.7476787996244507`*^9}},ExpressionUUID->"8d51bb72-3450-4feb-9156-\
+d16024eea00d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"SafeDivide", "[", 
+     RowBox[{"a_", ",", "b_"}], "]"}], ":=", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"b", "\[Equal]", "0"}], ",", "a", ",", 
+      RowBox[{"Divide", "[", 
+       RowBox[{"a", ",", "b"}], "]"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "allows", " ", "this", " ", "function", " ", "to", " ", "operate", " ", 
+    "elementwise", " ", "on", " ", "matrices"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"SetAttributes", "[", 
+  RowBox[{"SafeDivide", ",", "Listable"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.747678577490037*^9, 3.747678578563552*^9}, {
+  3.7476788038789873`*^9, 
+  3.7476788212239647`*^9}},ExpressionUUID->"41d143c6-0a12-4e65-891d-\
+029f4c0dabf5"],
+
+Cell[CellGroupData[{
+
+Cell["1. Convert the pivot position to be 1.", "Subchapter",
+ CellChangeTimes->{{3.747678517642171*^9, 
+  3.7476785399634466`*^9}},ExpressionUUID->"77c4df9d-9b74-47de-8098-\
+ba4a68193b18"],
+
+Cell[TextData[{
+ "We first convert the pivot position to be 1. In this code, we inefficiently \
+convert ",
+ StyleBox["all",
+  FontWeight->"Bold"],
+ " pivot positions into 1 every time, rather than just for the one pivot we\
+\[CloseCurlyQuote]re working on. However, this doesn\[CloseCurlyQuote]t \
+impact performance noticeably."
+}], "Text",
+ CellChangeTimes->{{3.747678621321371*^9, 3.7476786695182858`*^9}, {
+  3.747678833512021*^9, 3.747678889926277*^9}, {3.747678929374812*^9, 
+  3.7476789435897894`*^9}},ExpressionUUID->"67dcc269-a0b3-4efc-8d57-\
+af6166793a82"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"DiagonalsToOne", "[", "mat_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"diags", ",", "divisor"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"diags", "=", 
+       RowBox[{"Join", "[", 
+        RowBox[{
+         RowBox[{"Diagonal", "[", "mat", "]"}], ",", 
+         RowBox[{"ConstantArray", "[", 
+          RowBox[{"1", ",", 
+           RowBox[{
+            RowBox[{"Length", "[", "mat", "]"}], "-", 
+            RowBox[{"Length", "[", 
+             RowBox[{"Diagonal", "[", "mat", "]"}], "]"}]}]}], "]"}]}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"divisor", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{"x", ",", 
+           RowBox[{"Length", "[", 
+            RowBox[{"mat", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "diags"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"SafeDivide", "[", 
+       RowBox[{"mat", ",", "divisor"}], "]"}]}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7476785464500504`*^9, 3.7476785573198175`*^9}, {
+  3.747680340919654*^9, 3.74768034685361*^9}, {3.7476804594916487`*^9, 
+  3.7476805029158535`*^9}, {3.7476805350567894`*^9, 
+  3.7476805359902706`*^9}},ExpressionUUID->"d329a808-4836-4acb-af39-\
+913dd78dad2d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2. Eliminate the other values in that column.", "Subchapter",
+ CellChangeTimes->{{3.747678909500824*^9, 
+  3.7476789235106173`*^9}},ExpressionUUID->"c3004c6f-5905-48f7-8682-\
+301f85ab563e"],
+
+Cell["\<\
+Now, we convert all other values in the first column to be 0, by subtracting \
+away a multiple of the pivot row.\
+\>", "Text",
+ CellChangeTimes->{{3.7476789814673023`*^9, 
+  3.7476790237001724`*^9}},ExpressionUUID->"121699ad-e634-46bf-bec1-\
+85070efa65f1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"EliminateColumn", "[", 
+    RowBox[{"mat_", ",", "i_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"reciprocals", ",", "nrows", ",", "orig"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"reciprocals", "=", 
+       RowBox[{"Transpose", "[", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"mat", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "i"}], "]"}], "]"}], ",", 
+          RowBox[{"Length", "[", 
+           RowBox[{"mat", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "]"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"nrows", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"mat", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", 
+         RowBox[{"Length", "[", "mat", "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"orig", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"row", "\[Equal]", "i"}], ",", 
+           RowBox[{"mat", "[", 
+            RowBox[{"[", 
+             RowBox[{"row", ",", "All"}], "]"}], "]"}], ",", 
+           RowBox[{"ConstantArray", "[", 
+            RowBox[{"0", ",", 
+             RowBox[{"Length", "[", 
+              RowBox[{"mat", "[", 
+               RowBox[{"[", "row", "]"}], "]"}], "]"}]}], "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"row", ",", "1", ",", 
+           RowBox[{"Length", "[", "mat", "]"}]}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"mat", "-", 
+       RowBox[{"reciprocals", "*", "nrows"}], "+", "orig"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.747680314250822*^9, 
+  3.7476803188061204`*^9}},ExpressionUUID->"238e1112-5dfa-4888-b4a7-\
+6f26a7ee5ddd"],
+
+Cell[TextData[{
+ "\nSince we do these same 2 steps for every pivot position, we encapsulate \
+this functionality and call it \[OpenCurlyDoubleQuote]Jordanizing\
+\[CloseCurlyDoubleQuote] a matrix (parameterized by ",
+ StyleBox["i",
+  FontSlant->"Italic"],
+ ", the pivot index)."
+}], "Text",
+ CellChangeTimes->{{3.747679028031207*^9, 
+  3.7476790979494452`*^9}},ExpressionUUID->"d1cac697-70a2-4f36-868c-\
+c544eec45bd0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"JordanizeColumn", "[", 
+    RowBox[{"mat_", ",", "i_"}], "]"}], ":=", 
+   RowBox[{"EliminateColumn", "[", 
+    RowBox[{
+     RowBox[{"DiagonalsToOne", "[", "mat", "]"}], ",", "i"}], "]"}]}], 
+  ";"}]], "Input",ExpressionUUID->"333cd3e4-b624-459a-873a-3a2f7105e9c2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3. Repeat the \[OpenCurlyDoubleQuote]Jordanization\
+\[CloseCurlyDoubleQuote] for each pivot.", "Subchapter",
+ CellChangeTimes->{{3.747679127929735*^9, 
+  3.7476791487500105`*^9}},ExpressionUUID->"ed60d646-7b2b-4af6-bb27-\
+a08f5fc88f22"],
+
+Cell["\<\
+The whole process is repeated for each row until the entire matrix is reduced.\
+\>", "Text",
+ CellChangeTimes->{{3.747679176623494*^9, 
+  3.7476792256881504`*^9}},ExpressionUUID->"98b001d5-89fc-4ce9-9e44-\
+e7d6991cc29f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"GaussianEliminate", "[", "mat_", "]"}], ":=", 
+   RowBox[{"GaussianEliminate", "[", 
+    RowBox[{"mat", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GaussianEliminate", "[", 
+    RowBox[{"mat_", ",", "i_"}], "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Min", "[", 
+       RowBox[{
+        RowBox[{"Length", "[", "mat", "]"}], ",", 
+        RowBox[{"Length", "[", 
+         RowBox[{"mat", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "]"}]}], ",", 
+     RowBox[{"GaussianEliminate", "[", 
+      RowBox[{
+       RowBox[{"JordanizeColumn", "[", 
+        RowBox[{"mat", ",", "i"}], "]"}], ",", 
+       RowBox[{"i", "+", "1"}]}], "]"}], ",", "mat"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.74767997187813*^9, 
+  3.7476799868201046`*^9}},ExpressionUUID->"27799c9b-c10f-40e7-8e25-\
+b0a2ddd59bdd"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["A Randomized Example", "Chapter",
+ CellChangeTimes->{{3.747679252419717*^9, 
+  3.747679258053052*^9}},ExpressionUUID->"1cf5dc33-88ca-4f8a-ab49-\
+8ed105cf0eb6"],
+
+Cell["Let\[CloseCurlyQuote]s define a matrix to row-reduce:", "Text",
+ CellChangeTimes->{{3.747679266539008*^9, 
+  3.747679285655348*^9}},ExpressionUUID->"bda344d0-bfa7-458c-84aa-\
+3a167f484219"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"m", "=", "4"}], ";", "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"number", " ", "of", " ", "equations"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"n", "=", "5"}], ";", "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"number", " ", "of", " ", "variables"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"A", "=", 
+     RowBox[{"RandomInteger", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "10"}], ",", "10"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"m", ",", 
+         RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}]}], ")"}], "//", 
+   "MatrixForm"}]}]], "Input",
+ CellChangeTimes->{{3.7476792893358417`*^9, 3.747679404154463*^9}, {
+  3.7476796818458195`*^9, 3.7476796821068287`*^9}, {3.747679712604805*^9, 
+  3.747679720979699*^9}, {3.7476800081385117`*^9, 3.7476800084859695`*^9}, {
+  3.74768005335737*^9, 3.7476800634438715`*^9}, {3.747680156346532*^9, 
+  3.7476801580119934`*^9}, {3.7476803625516567`*^9, 3.7476803882831926`*^9}, {
+  3.747680659748553*^9, 
+  3.7476807144814243`*^9}},ExpressionUUID->"1346dcfe-f503-47ec-af65-\
+7a51008e2522"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"2", "1", "8", 
+      RowBox[{"-", "4"}], "3", "6"},
+     {
+      RowBox[{"-", "8"}], "5", "5", "1", "6", 
+      RowBox[{"-", "10"}]},
+     {"9", 
+      RowBox[{"-", "5"}], 
+      RowBox[{"-", "8"}], "5", 
+      RowBox[{"-", "8"}], "6"},
+     {"3", "10", "2", 
+      RowBox[{"-", "2"}], "2", "7"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.747679367621593*^9, {3.747679407987011*^9, 3.747679412201508*^9}, 
+   3.747679605418579*^9, 3.747679682951311*^9, {3.74767972304224*^9, 
+   3.7476797395597553`*^9}, 3.74768001018677*^9, 3.747680129892991*^9, 
+   3.747680165746532*^9, 3.747680274973301*^9, {3.747680363747628*^9, 
+   3.7476803894136395`*^9}, 3.747680550223255*^9, {3.747680683817298*^9, 
+   3.7476807151799088`*^9}},ExpressionUUID->"e9c4b32f-6e61-421e-9bab-\
+b5d5d50630bb"]
+}, Open  ]],
+
+Cell["Using the built-in row reduction function,", "Text",
+ CellChangeTimes->{{3.7476794204337587`*^9, 
+  3.747679441499312*^9}},ExpressionUUID->"1ac8ad1f-8425-402e-9c74-\
+3262629950bd"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RowReduce", "[", "A", "]"}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.74767944498912*^9, 3.747679477049257*^9}, {
+  3.747679875137986*^9, 
+  3.7476798863658648`*^9}},ExpressionUUID->"34a86787-584d-4e47-8269-\
+2e13075aa48d"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0", "0", "0", 
+      RowBox[{"-", 
+       FractionBox["1546", "4181"]}], 
+      FractionBox["5137", "4181"]},
+     {"0", "1", "0", "0", 
+      FractionBox["903", "4181"], 
+      FractionBox["664", "4181"]},
+     {"0", "0", "1", "0", 
+      FractionBox["1698", "4181"], 
+      RowBox[{"-", 
+       FractionBox["71", "4181"]}]},
+     {"0", "0", "0", "1", 
+      RowBox[{"-", 
+       FractionBox["287", "4181"]}], 
+      RowBox[{"-", 
+       FractionBox["3679", "4181"]}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.747679454894668*^9, 3.747679478131193*^9}, 
+   3.7476796077370834`*^9, {3.7476797358767533`*^9, 3.7476797430737534`*^9}, 
+   3.7476801327790384`*^9, 3.7476802798078375`*^9, 3.7476803704401913`*^9, 
+   3.747680553170819*^9, 3.74768068741539*^9, 
+   3.747680718262912*^9},ExpressionUUID->"0321c895-58bc-4715-b66f-\
+f61203792714"]
+}, Open  ]],
+
+Cell["Now using this new version,", "Text",
+ CellChangeTimes->{{3.747679485574022*^9, 
+  3.7476794954775114`*^9}},ExpressionUUID->"7cf30a99-2771-4b37-88db-\
+bf274a43be27"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GaussianEliminate", "[", "A", "]"}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.747679499050019*^9, 
+  3.7476795094340053`*^9}},ExpressionUUID->"99a2bb89-4cf1-4c9c-a2c6-\
+fcd8fb025435"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0", "0", "0", 
+      RowBox[{"-", 
+       FractionBox["1546", "4181"]}], 
+      FractionBox["5137", "4181"]},
+     {"0", "1", "0", "0", 
+      FractionBox["903", "4181"], 
+      FractionBox["664", "4181"]},
+     {"0", "0", "1", "0", 
+      FractionBox["1698", "4181"], 
+      RowBox[{"-", 
+       FractionBox["71", "4181"]}]},
+     {"0", "0", "0", "1", 
+      RowBox[{"-", 
+       FractionBox["287", "4181"]}], 
+      RowBox[{"-", 
+       FractionBox["3679", "4181"]}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.7476805559533153`*^9, {3.7476806912309265`*^9, 
+   3.7476807202589087`*^9}},ExpressionUUID->"1590ce4d-7a65-46a3-b2f3-\
+fefb0ce92ee8"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{759, 813},
+WindowMargins->{{99, Automatic}, {94, Automatic}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 243, 4, 156, "Title",ExpressionUUID->"02a27a96-5861-4076-8a29-9a12599406c8"],
+Cell[CellGroupData[{
+Cell[848, 30, 166, 3, 67, "Chapter",ExpressionUUID->"51ba9d02-ccf0-4022-90b6-da84b0c131f9"],
+Cell[1017, 35, 814, 22, 100, "Text",ExpressionUUID->"f8171a31-1e41-4378-9987-a6f6f703d1fb"],
+Cell[1834, 59, 384, 12, 34, "Text",ExpressionUUID->"8d51bb72-3450-4feb-9156-d16024eea00d"],
+Cell[2221, 73, 828, 22, 86, "Input",ExpressionUUID->"41d143c6-0a12-4e65-891d-029f4c0dabf5"],
+Cell[CellGroupData[{
+Cell[3074, 99, 188, 3, 64, "Subchapter",ExpressionUUID->"77c4df9d-9b74-47de-8098-ba4a68193b18"],
+Cell[3265, 104, 566, 12, 78, "Text",ExpressionUUID->"67dcc269-a0b3-4efc-8d57-af6166793a82"],
+Cell[3834, 118, 1478, 38, 105, "Input",ExpressionUUID->"d329a808-4836-4acb-af39-913dd78dad2d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5349, 161, 195, 3, 64, "Subchapter",ExpressionUUID->"c3004c6f-5905-48f7-8682-301f85ab563e"],
+Cell[5547, 166, 266, 6, 56, "Text",ExpressionUUID->"121699ad-e634-46bf-bec1-85070efa65f1"],
+Cell[5816, 174, 1902, 52, 143, "Input",ExpressionUUID->"238e1112-5dfa-4888-b4a7-6f26a7ee5ddd"],
+Cell[7721, 228, 417, 10, 78, "Text",ExpressionUUID->"d1cac697-70a2-4f36-868c-c544eec45bd0"],
+Cell[8141, 240, 312, 8, 28, "Input",ExpressionUUID->"333cd3e4-b624-459a-873a-3a2f7105e9c2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8490, 253, 242, 4, 64, "Subchapter",ExpressionUUID->"ed60d646-7b2b-4af6-bb27-a08f5fc88f22"],
+Cell[8735, 259, 230, 5, 34, "Text",ExpressionUUID->"98b001d5-89fc-4ce9-9e44-e7d6991cc29f"],
+Cell[8968, 266, 957, 27, 86, "Input",ExpressionUUID->"27799c9b-c10f-40e7-8e25-b0a2ddd59bdd"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9974, 299, 165, 3, 67, "Chapter",ExpressionUUID->"1cf5dc33-88ca-4f8a-ab49-8ed105cf0eb6"],
+Cell[10142, 304, 195, 3, 34, "Text",ExpressionUUID->"bda344d0-bfa7-458c-84aa-3a167f484219"],
+Cell[CellGroupData[{
+Cell[10362, 311, 1154, 29, 67, "Input",ExpressionUUID->"1346dcfe-f503-47ec-af65-7a51008e2522"],
+Cell[11519, 342, 1319, 34, 96, "Output",ExpressionUUID->"e9c4b32f-6e61-421e-9bab-b5d5d50630bb"]
+}, Open  ]],
+Cell[12853, 379, 186, 3, 34, "Text",ExpressionUUID->"1ac8ad1f-8425-402e-9c74-3262629950bd"],
+Cell[CellGroupData[{
+Cell[13064, 386, 271, 6, 28, "Input",ExpressionUUID->"34a86787-584d-4e47-8269-2e13075aa48d"],
+Cell[13338, 394, 1384, 37, 144, "Output",ExpressionUUID->"0321c895-58bc-4715-b66f-f61203792714"]
+}, Open  ]],
+Cell[14737, 434, 171, 3, 34, "Text",ExpressionUUID->"7cf30a99-2771-4b37-88db-bf274a43be27"],
+Cell[CellGroupData[{
+Cell[14933, 441, 231, 5, 28, "Input",ExpressionUUID->"99a2bb89-4cf1-4c9c-a2c6-fcd8fb025435"],
+Cell[15167, 448, 1192, 35, 144, "Output",ExpressionUUID->"1590ce4d-7a65-46a3-b2f3-fefb0ce92ee8"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

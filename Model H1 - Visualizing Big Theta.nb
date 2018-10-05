@@ -1,0 +1,544 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     22905,        536]
+NotebookOptionsPosition[     21435,        501]
+NotebookOutlinePosition[     21784,        516]
+CellTagsIndexPosition[     21741,        513]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Some", " ", "Function", " ", "Definitions"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"ConstantFunction", "[", 
+      RowBox[{"_", ",", " ", "c_"}], "]"}], ":=", "c"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Logarithmic", "[", 
+      RowBox[{"x_", ",", " ", "c_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"c", "*", 
+       RowBox[{"Log", "[", 
+        RowBox[{"2", ",", "x"}], "]"}]}], "+", "1"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Linear", "[", 
+      RowBox[{"x_", ",", "c_"}], "]"}], " ", ":=", 
+     RowBox[{"c", "*", "x"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Linearithmic", "[", 
+      RowBox[{"x_", ",", " ", "c_"}], "]"}], ":=", 
+     RowBox[{"c", "*", "x", "*", 
+      RowBox[{"Log", "[", "x", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Quadratic", "[", 
+      RowBox[{"x_", ",", " ", "c_"}], "]"}], ":=", 
+     RowBox[{"c", "*", 
+      RowBox[{"x", "^", "2"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Cubic", "[", 
+      RowBox[{"x_", ",", " ", "c_"}], "]"}], ":=", 
+     RowBox[{"c", "*", 
+      RowBox[{"x", "^", "3"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Quartic", "[", 
+      RowBox[{"x_", ",", " ", "c_"}], "]"}], ":=", 
+     RowBox[{"c", "*", 
+      RowBox[{"x", "^", "4"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Twentyic", "[", 
+      RowBox[{"x_", ",", "c_"}], "]"}], ":=", 
+     RowBox[{"c", "*", 
+      RowBox[{"x", "^", "20"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Fiftyic", "[", 
+      RowBox[{"x_", ",", "c_"}], "]"}], ":=", 
+     RowBox[{"c", "*", 
+      RowBox[{"x", "^", "50"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Exponential", "[", 
+      RowBox[{"x_", ",", " ", "c_"}], "]"}], ":=", 
+     RowBox[{"c", "*", 
+      RowBox[{"E", "^", "x"}]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Big", " ", "Theta", " ", "Plotting"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"BigThetaPlot", "[", 
+      RowBox[{"RF_", ",", "BF_"}], "]"}], ":=", 
+     RowBox[{"Magnify", "[", 
+      RowBox[{
+       RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Plot", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"RF", "[", "x", "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"BF", "[", 
+              RowBox[{"x", ",", "a"}], "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"BF", "[", 
+              RowBox[{"x", ",", " ", "b"}], "]"}]}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"x", ",", "0", ",", "n"}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"PlotLegends", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<Runtime Function\>\"", ",", "\"\<Lower Bound Function\>\"", 
+              ",", "\"\<Upper Bound Function\>\""}], "}"}]}], ",", 
+           RowBox[{"Filling", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"2", "\[Rule]", 
+              RowBox[{"{", "3", "}"}]}], "}"}]}], ",", 
+           RowBox[{"AspectRatio", "\[Rule]", "1"}], ",", 
+           RowBox[{"PlotRange", "\[Rule]", "Full"}], ",", 
+           RowBox[{"Axes", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"True", ",", "False"}], "}"}]}]}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"a", ",", "0.25", ",", "\"\<Scale of Lower Limit\>\""}], 
+            "}"}], ",", "0.001", ",", "b"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"b", ",", "2", ",", "\"\<Scale of Upper Limit\>\""}], 
+            "}"}], ",", "a", ",", "100"}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"n", ",", "10", ",", "\"\<Number of Iterations\>\""}], 
+            "}"}], ",", "1", ",", "500", ",", ".01"}], "}"}]}], "]"}], ",", 
+       "2"}], "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.745268152920258*^9, 3.7452681633772354`*^9}, {
+   3.7452692636781445`*^9, 3.7452695244961057`*^9}, {3.745269582518164*^9, 
+   3.7452696165951576`*^9}, {3.7452698743961587`*^9, 3.7452698749761267`*^9}, 
+   3.7452701234865913`*^9, {3.745271816530894*^9, 3.7452718282438855`*^9}, {
+   3.745275620400786*^9, 3.745275631552993*^9}, 3.7452756770899706`*^9, {
+   3.745275917123763*^9, 3.7452759172377877`*^9}, {3.745276080366763*^9, 
+   3.7452760807217712`*^9}, {3.745276382557932*^9, 3.745276412802975*^9}, {
+   3.7452764494375715`*^9, 3.745276472609172*^9}, {3.7452766529584827`*^9, 
+   3.7452766732434845`*^9}, {3.745276855245509*^9, 3.74527687010548*^9}, {
+   3.745277161718514*^9, 3.7452771861915135`*^9}, {3.7452773707988777`*^9, 
+   3.745277395156881*^9}, {3.745277542574912*^9, 3.7452775427858815`*^9}, {
+   3.7475199477231436`*^9, 3.7475199478581448`*^9}, {3.7475201044491367`*^9, 
+   3.747520111136198*^9}, {3.7475202057431803`*^9, 3.747520205804173*^9}, {
+   3.747520239509181*^9, 
+   3.747520239768141*^9}},ExpressionUUID->"b1a9ea8e-effd-46e7-9c62-\
+b7ad56797fe8"],
+
+Cell[CellGroupData[{
+
+Cell["Visualizations with Big Theta", "Section",
+ CellChangeTimes->{{3.745275962669778*^9, 3.7452759723947687`*^9}, {
+  3.745277328986929*^9, 
+  3.7452773295359077`*^9}},ExpressionUUID->"f08c05f2-be79-4688-9b45-\
+d5edebc50a5b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "What", " ", "function", " ", "do", " ", "you", " ", "want", " ", "to", 
+    " ", "squeeze", " ", "the", " ", "limits", " ", "out", " ", 
+    RowBox[{"of", "?"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"RuntimeFunction", "[", "x_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"x", "^", "3"}], "+", 
+      RowBox[{
+       RowBox[{"x", "^", "2"}], "*", 
+       RowBox[{"Log", "[", "x", "]"}]}], "+", 
+      RowBox[{"x", "^", "2"}], "+", 
+      RowBox[{"x", "*", 
+       RowBox[{"Log", "[", "x", "]"}]}], "+", 
+      RowBox[{"5", "*", "x"}], "-", "2"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "What", " ", "function", " ", "are", " ", "you", " ", "going", " ", "to", 
+     " ", "use", " ", "to", " ", "try", " ", "to", " ", "squeeze", " ", "the",
+      " ", "limits", " ", "out", " ", "of", " ", "the", " ", "function", " ", 
+     RowBox[{"above", "?"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"BoundingFunction", " ", ":=", " ", "Quartic"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"BigThetaPlot", "[", 
+    RowBox[{"RuntimeFunction", ",", " ", "BoundingFunction"}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.745269543267148*^9, 3.745269577397154*^9}, {
+   3.7452696868161287`*^9, 3.7452697089031277`*^9}, {3.7452698578861694`*^9, 
+   3.7452698593171606`*^9}, {3.745269946525098*^9, 3.7452699515791636`*^9}, {
+   3.7452699939715767`*^9, 3.7452702466586275`*^9}, {3.7452702942786393`*^9, 
+   3.745270401389645*^9}, {3.745270471478639*^9, 3.7452704781436143`*^9}, {
+   3.745270520601201*^9, 3.745270549958202*^9}, {3.7452705824401503`*^9, 
+   3.7452705837981634`*^9}, {3.7452707738091936`*^9, 
+   3.7452707742521925`*^9}, {3.745270805818147*^9, 3.745270832293165*^9}, {
+   3.745270913699197*^9, 3.745270938838189*^9}, {3.7452709818272123`*^9, 
+   3.745270998048217*^9}, {3.7452710492762094`*^9, 3.7452710499171677`*^9}, {
+   3.7452710922812133`*^9, 3.745271176894169*^9}, {3.7452713365392017`*^9, 
+   3.7452714181472106`*^9}, {3.7452715352752113`*^9, 3.745271540241192*^9}, {
+   3.745271589780197*^9, 3.745271629715892*^9}, {3.7452716743078594`*^9, 
+   3.745271676911877*^9}, {3.7452718009408855`*^9, 3.745271922649853*^9}, {
+   3.7452720650328903`*^9, 3.7452720770998497`*^9}, {3.745272142061867*^9, 
+   3.7452721939698534`*^9}, {3.745272239890854*^9, 3.7452722773628917`*^9}, {
+   3.745272312834876*^9, 3.745272490116992*^9}, {3.745274942922253*^9, 
+   3.7452749449792633`*^9}, {3.7452750716842785`*^9, 
+   3.7452751184532423`*^9}, {3.745275365629402*^9, 3.7452754201894026`*^9}, {
+   3.7452755064025087`*^9, 3.7452755086865106`*^9}, 3.7452756164156075`*^9, {
+   3.7452759191517563`*^9, 3.745275919242753*^9}, {3.745275975316802*^9, 
+   3.7452759767498107`*^9}, {3.7452762874689903`*^9, 3.74527634439594*^9}, {
+   3.747520032646183*^9, 3.747520034483182*^9}, {3.747520116212178*^9, 
+   3.747520116990143*^9}},ExpressionUUID->"9af6d514-acfc-4378-8429-\
+7236e0f3c686"],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[
+   StyleBox[
+    DynamicModuleBox[{$CellContext`a$$ = 0.06004, $CellContext`b$$ = 
+     0.65967976, $CellContext`n$$ = 70.91, Typeset`show$$ = True, 
+     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+     "\"untitled\"", Typeset`specs$$ = {{{
+        Hold[$CellContext`a$$], 0.25, "Scale of Lower Limit"}, 0.001, 
+       Dynamic[$CellContext`b$$]}, {{
+        Hold[$CellContext`b$$], 2, "Scale of Upper Limit"}, 
+       Dynamic[$CellContext`a$$], 100}, {{
+        Hold[$CellContext`n$$], 10, "Number of Iterations"}, 1, 500, 0.01}}, 
+     Typeset`size$$ = {1070., {353., 365.}}, Typeset`update$$ = 0, 
+     Typeset`initDone$$, Typeset`skipInitDone$$ = 
+     True, $CellContext`a$70388$$ = 0, $CellContext`b$70389$$ = 
+     0, $CellContext`n$70390$$ = 0}, 
+     DynamicBox[Manipulate`ManipulateBoxes[
+      1, StandardForm, 
+       "Variables" :> {$CellContext`a$$ = 0.25, $CellContext`b$$ = 
+         2, $CellContext`n$$ = 10}, "ControllerVariables" :> {
+         Hold[$CellContext`a$$, $CellContext`a$70388$$, 0], 
+         Hold[$CellContext`b$$, $CellContext`b$70389$$, 0], 
+         Hold[$CellContext`n$$, $CellContext`n$70390$$, 0]}, 
+       "OtherVariables" :> {
+        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+         Typeset`specs$$, Typeset`size$$, Typeset`update$$, 
+         Typeset`initDone$$, Typeset`skipInitDone$$}, "Body" :> Plot[{
+          $CellContext`RuntimeFunction[$CellContext`x], 
+          $CellContext`Quartic[$CellContext`x, $CellContext`a$$], 
+          $CellContext`Quartic[$CellContext`x, $CellContext`b$$]}, \
+{$CellContext`x, 0, $CellContext`n$$}, 
+         PlotLegends -> {
+          "Runtime Function", "Lower Bound Function", "Upper Bound Function"},
+          Filling -> {2 -> {3}}, AspectRatio -> 1, PlotRange -> Full, 
+         Axes -> {True, False}], 
+       "Specifications" :> {{{$CellContext`a$$, 0.25, "Scale of Lower Limit"},
+           0.001, 
+          
+          Dynamic[$CellContext`b$$]}, {{$CellContext`b$$, 2, 
+           "Scale of Upper Limit"}, 
+          Dynamic[$CellContext`a$$], 
+          100}, {{$CellContext`n$$, 10, "Number of Iterations"}, 1, 500, 
+          0.01}}, "Options" :> {}, "DefaultOptions" :> {}],
+      ImageSizeCache->{1160., {498., 510.}},
+      SingleEvaluation->True],
+     Deinitialization:>None,
+     DynamicModuleValues:>{},
+     SynchronousInitialization->True,
+     UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+     UnsavedVariables:>{Typeset`initDone$$},
+     UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+    Deployed->True,
+    StripOnInput->False],
+   Manipulate`InterpretManipulate[1]],
+  StripOnInput->False,
+  Magnification->2 Inherited]], "Output",
+ CellChangeTimes->{
+  3.7452754212924023`*^9, 3.7452755095155087`*^9, 3.745275914244753*^9, 
+   3.7452763472149215`*^9, 3.7452764313879185`*^9, {3.745276658282485*^9, 
+   3.7452766760644817`*^9}, 3.7452768725684814`*^9, {3.7475199110061407`*^9, 
+   3.747519921988143*^9}, 3.7475200402091484`*^9, 
+   3.7475201176361413`*^9},ExpressionUUID->"95e28806-8eed-49b5-ac6f-\
+755d08e259ae"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["How Efficient is Logarithmic Really?", "Subsection",
+ CellChangeTimes->{{3.7452769519044986`*^9, 
+  3.7452769642594986`*^9}},ExpressionUUID->"16f4e943-ccb1-4e77-922e-\
+6d9f8461b145"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"RuntimeFunction", "[", "x_", "]"}], ":=", 
+   RowBox[{"Logarithmic", "[", 
+    RowBox[{"x", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"BoundingFunction", " ", ":=", " ", "ConstantFunction"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"BigThetaPlot", "[", 
+  RowBox[{"RuntimeFunction", ",", " ", "BoundingFunction"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.745276978480514*^9, 3.7452770392445097`*^9}, {
+  3.7452771037624955`*^9, 
+  3.7452771092505035`*^9}},ExpressionUUID->"8f03b82d-5fbb-4672-97d7-\
+c6910584d210"],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[
+   StyleBox[
+    DynamicModuleBox[{$CellContext`a$$ = 0.25, $CellContext`b$$ = 
+     19.30225, $CellContext`n$$ = 79.89, Typeset`show$$ = True, 
+     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+     "\"untitled\"", Typeset`specs$$ = {{{
+        Hold[$CellContext`a$$], 0.25, "Scale of Lower Limit"}, 0.001, 
+       Dynamic[$CellContext`b$$]}, {{
+        Hold[$CellContext`b$$], 2, "Scale of Upper Limit"}, 
+       Dynamic[$CellContext`a$$], 100}, {{
+        Hold[$CellContext`n$$], 10, "Number of Iterations"}, 1, 500, 0.01}}, 
+     Typeset`size$$ = {1070., {353., 365.}}, Typeset`update$$ = 0, 
+     Typeset`initDone$$, Typeset`skipInitDone$$ = 
+     True, $CellContext`a$88635$$ = 0, $CellContext`b$88636$$ = 
+     0, $CellContext`n$88637$$ = 0}, 
+     DynamicBox[Manipulate`ManipulateBoxes[
+      1, StandardForm, 
+       "Variables" :> {$CellContext`a$$ = 0.25, $CellContext`b$$ = 
+         2, $CellContext`n$$ = 10}, "ControllerVariables" :> {
+         Hold[$CellContext`a$$, $CellContext`a$88635$$, 0], 
+         Hold[$CellContext`b$$, $CellContext`b$88636$$, 0], 
+         Hold[$CellContext`n$$, $CellContext`n$88637$$, 0]}, 
+       "OtherVariables" :> {
+        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+         Typeset`specs$$, Typeset`size$$, Typeset`update$$, 
+         Typeset`initDone$$, Typeset`skipInitDone$$}, "Body" :> Plot[{
+          $CellContext`RuntimeFunction[$CellContext`x], 
+          $CellContext`ConstantFunction[$CellContext`x, $CellContext`a$$], 
+          $CellContext`ConstantFunction[$CellContext`x, $CellContext`b$$]}, \
+{$CellContext`x, 0, $CellContext`n$$}, 
+         PlotLegends -> {
+          "Runtime Function", "Lower Bound Function", "Upper Bound Function"},
+          Filling -> {2 -> {3}}, AspectRatio -> 1, PlotRange -> Full, 
+         Axes -> {True, False}], 
+       "Specifications" :> {{{$CellContext`a$$, 0.25, "Scale of Lower Limit"},
+           0.001, 
+          
+          Dynamic[$CellContext`b$$]}, {{$CellContext`b$$, 2, 
+           "Scale of Upper Limit"}, 
+          Dynamic[$CellContext`a$$], 
+          100}, {{$CellContext`n$$, 10, "Number of Iterations"}, 1, 500, 
+          0.01}}, "Options" :> {}, "DefaultOptions" :> {}],
+      ImageSizeCache->{1160., {473., 485.}},
+      SingleEvaluation->True],
+     Deinitialization:>None,
+     DynamicModuleValues:>{},
+     SynchronousInitialization->True,
+     UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+     UnsavedVariables:>{Typeset`initDone$$},
+     UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+    Deployed->True,
+    StripOnInput->False],
+   Manipulate`InterpretManipulate[1]],
+  StripOnInput->False,
+  Magnification->2 Inherited]], "Output",
+ CellChangeTimes->{{3.7452770203105183`*^9, 3.745277040044482*^9}, 
+   3.7452771109154844`*^9, 3.74752021217914*^9, 
+   3.74752024909814*^9},ExpressionUUID->"06736ccf-c226-41e4-85e8-\
+316d54a45bcd"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["How Horrible is Exponential Really?", "Subsection",
+ CellChangeTimes->{{3.745277126186491*^9, 3.7452771356574974`*^9}, {
+  3.7452775922688894`*^9, 
+  3.745277603112881*^9}},ExpressionUUID->"e2258834-a521-4f88-87be-\
+ad043b1cbe63"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"RuntimeFunction", "[", "x_", "]"}], ":=", 
+   RowBox[{"Exponential", "[", 
+    RowBox[{"x", ",", "1000"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"BoundingFunction", " ", ":=", " ", "Twentyic"}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"For", " ", "this", " ", "one"}], ",", " ", 
+    RowBox[{
+     RowBox[{"try", " ", "playing", " ", "slowly", " ", "from", " ", "n"}], 
+     "=", 
+     RowBox[{
+      RowBox[{"30", " ", "to", " ", "n"}], "=", "100."}]}]}], " ", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"BigThetaPlot", "[", 
+  RowBox[{"RuntimeFunction", ",", " ", "BoundingFunction"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.745277151287498*^9, 3.74527715191448*^9}, {
+  3.745277202805896*^9, 3.7452772240619335`*^9}, {3.745277344419901*^9, 
+  3.745277361780884*^9}, {3.7452774121249094`*^9, 3.745277412723935*^9}, {
+  3.7452774747869425`*^9, 
+  3.7452775148808813`*^9}},ExpressionUUID->"2a2bace5-91ce-470e-bcfb-\
+81ad7e19e478"],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[
+   StyleBox[
+    DynamicModuleBox[{$CellContext`a$$ = 0.25, $CellContext`b$$ = 
+     2, $CellContext`n$$ = 30, Typeset`show$$ = True, 
+     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+     "\"untitled\"", Typeset`specs$$ = {{{
+        Hold[$CellContext`a$$], 0.25, "Scale of Lower Limit"}, 0.001, 
+       Dynamic[$CellContext`b$$]}, {{
+        Hold[$CellContext`b$$], 2, "Scale of Upper Limit"}, 
+       Dynamic[$CellContext`a$$], 100}, {{
+        Hold[$CellContext`n$$], 10, "Number of Iterations"}, 1, 500, 0.01}}, 
+     Typeset`size$$ = {1070., {353., 365.}}, Typeset`update$$ = 0, 
+     Typeset`initDone$$, Typeset`skipInitDone$$ = 
+     True, $CellContext`a$238775$$ = 0, $CellContext`b$238776$$ = 
+     0, $CellContext`n$238777$$ = 0}, 
+     DynamicBox[Manipulate`ManipulateBoxes[
+      1, StandardForm, 
+       "Variables" :> {$CellContext`a$$ = 0.25, $CellContext`b$$ = 
+         2, $CellContext`n$$ = 10}, "ControllerVariables" :> {
+         Hold[$CellContext`a$$, $CellContext`a$238775$$, 0], 
+         Hold[$CellContext`b$$, $CellContext`b$238776$$, 0], 
+         Hold[$CellContext`n$$, $CellContext`n$238777$$, 0]}, 
+       "OtherVariables" :> {
+        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+         Typeset`specs$$, Typeset`size$$, Typeset`update$$, 
+         Typeset`initDone$$, Typeset`skipInitDone$$}, "Body" :> Plot[{
+          $CellContext`RuntimeFunction[$CellContext`x], 
+          $CellContext`Twentyic[$CellContext`x, $CellContext`a$$], 
+          $CellContext`Twentyic[$CellContext`x, $CellContext`b$$]}, \
+{$CellContext`x, 0, $CellContext`n$$}, 
+         PlotLegends -> {
+          "Runtime Function", "Lower Bound Function", "Upper Bound Function"},
+          Filling -> {2 -> {3}}, AspectRatio -> 1, PlotRange -> Full, 
+         Axes -> {True, False}], 
+       "Specifications" :> {{{$CellContext`a$$, 0.25, "Scale of Lower Limit"},
+           0.001, 
+          
+          Dynamic[$CellContext`b$$]}, {{$CellContext`b$$, 2, 
+           "Scale of Upper Limit"}, 
+          Dynamic[$CellContext`a$$], 
+          100}, {{$CellContext`n$$, 10, "Number of Iterations"}, 1, 500, 
+          0.01}}, "Options" :> {}, "DefaultOptions" :> {}],
+      ImageSizeCache->{1160., {473., 485.}},
+      SingleEvaluation->True],
+     Deinitialization:>None,
+     DynamicModuleValues:>{},
+     SynchronousInitialization->True,
+     UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+     UnsavedVariables:>{Typeset`initDone$$},
+     UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+    Deployed->True,
+    StripOnInput->False],
+   Manipulate`InterpretManipulate[1]],
+  StripOnInput->False,
+  Magnification->2 Inherited]], "Output",
+ CellChangeTimes->{
+  3.745277225395891*^9, 3.745277345159884*^9, {3.745277384878882*^9, 
+   3.745277414004881*^9}, 3.7452775162278852`*^9, 
+   3.7452775480478797`*^9},ExpressionUUID->"3542f100-b971-4ec8-83fe-\
+e605191150a1"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7452702091005864`*^9, 
+  3.7452702160726004`*^9}},ExpressionUUID->"1a874b9d-c3af-4909-8ea4-\
+c9d6a8b8e68e"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{2194, 1191},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 5549, 139, 428, "Input",ExpressionUUID->"b1a9ea8e-effd-46e7-9c62-b7ad56797fe8"],
+Cell[CellGroupData[{
+Cell[6132, 163, 227, 4, 67, "Section",ExpressionUUID->"f08c05f2-be79-4688-9b45-d5edebc50a5b"],
+Cell[CellGroupData[{
+Cell[6384, 171, 3115, 57, 162, "Input",ExpressionUUID->"9af6d514-acfc-4378-8429-7236e0f3c686"],
+Cell[9502, 230, 3256, 65, 1027, "Output",ExpressionUUID->"95e28806-8eed-49b5-ac6f-755d08e259ae"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12795, 300, 188, 3, 53, "Subsection",ExpressionUUID->"16f4e943-ccb1-4e77-922e-6d9f8461b145"],
+Cell[CellGroupData[{
+Cell[13008, 307, 631, 15, 86, "Input",ExpressionUUID->"8f03b82d-5fbb-4672-97d7-c6910584d210"],
+Cell[13642, 324, 3086, 62, 977, "Output",ExpressionUUID->"06736ccf-c226-41e4-85e8-316d54a45bcd"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16777, 392, 236, 4, 53, "Subsection",ExpressionUUID->"e2258834-a521-4f88-87be-ad043b1cbe63"],
+Cell[CellGroupData[{
+Cell[17038, 400, 1102, 26, 124, "Input",ExpressionUUID->"2a2bace5-91ce-470e-bcfb-81ad7e19e478"],
+Cell[18143, 428, 3093, 63, 977, "Output",ExpressionUUID->"3542f100-b971-4ec8-83fe-e605191150a1"]
+}, Open  ]],
+Cell[21251, 494, 156, 3, 28, "Input",ExpressionUUID->"1a874b9d-c3af-4909-8ea4-c9d6a8b8e68e"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

@@ -1,0 +1,627 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     26403,        619]
+NotebookOptionsPosition[     23202,        559]
+NotebookOutlinePosition[     23551,        574]
+CellTagsIndexPosition[     23508,        571]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Aesthetics of the Fibonacci Sequence", "Title",
+ CellChangeTimes->{{3.7475238152805257`*^9, 
+  3.7475238255355234`*^9}},ExpressionUUID->"ce10cc7a-29b7-455e-aed1-\
+749444de5bcd"],
+
+Cell[CellGroupData[{
+
+Cell["Convergence of Continued Fractions", "Chapter",
+ CellChangeTimes->{{3.7475237984245267`*^9, 3.747523800563533*^9}, {
+  3.74768275417058*^9, 3.7476827641262007`*^9}, {3.7476839065873146`*^9, 
+  3.747683909036208*^9}, {3.7476855432555523`*^9, 
+  3.74768554678292*^9}},ExpressionUUID->"8b58f2ae-a8e4-4cae-a13f-\
+0a014a861d51"],
+
+Cell[CellGroupData[{
+
+Cell["Golden Ratio Continued Fraction", "Subsubsection",
+ CellChangeTimes->{{3.74768562076198*^9, 
+  3.7476856287661643`*^9}},ExpressionUUID->"fd042a8f-165e-4239-b32f-\
+464d1598233e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ContinuedGoldenRatio", "[", "n_", "]"}], ":=", 
+   RowBox[{"Nest", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"1", "/", "#"}]}], ")"}], "&"}], ",", "1", ",", "n"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ContinuedGoldenRatio", "[", "100", "]"}], "//", "N"}]}], "Input",
+ CellChangeTimes->{{3.747524383079522*^9, 3.7475243852435236`*^9}, {
+   3.74752563515492*^9, 3.747525656509537*^9}, {3.747680923855959*^9, 
+   3.7476809295694494`*^9}, 3.747683883877209*^9, {3.7476839507329764`*^9, 
+   3.747683961181645*^9}, {3.7476840051865873`*^9, 3.7476840668978252`*^9}, {
+   3.7476841320682197`*^9, 3.7476841777526226`*^9}, {3.7476842209836426`*^9, 
+   3.7476842512217093`*^9}},ExpressionUUID->"23129f6e-032c-4515-9989-\
+5f391fcf9327"],
+
+Cell[BoxData["1.6180339887498947`"], "Output",
+ CellChangeTimes->{{3.7476842398956633`*^9, 3.747684252022183*^9}, 
+   3.7476852847246094`*^9, 
+   3.7476869221459103`*^9},ExpressionUUID->"006680aa-c3eb-431f-8ab0-\
+ae98d9dc2feb"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Continued Fraction for Some Other Famous Irrationals", "Subsubsection",
+ CellChangeTimes->{{3.74768562076198*^9, 
+  3.7476856468825073`*^9}},ExpressionUUID->"2f877c97-6e96-4025-8b4d-\
+5799b7e64048"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ContinuedFractionApproximation", "[", 
+    RowBox[{"exact_", ",", "k_"}], "]"}], ":=", 
+   RowBox[{"ContinuedFractionApproximationAux", "[", 
+    RowBox[{"k", ",", 
+     RowBox[{"ContinuedFraction", "[", 
+      RowBox[{"exact", ",", 
+       RowBox[{"k", "+", "1"}]}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ContinuedFractionApproximationAux", "[", 
+    RowBox[{"k_", ",", "lst_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"lst", "[", 
+     RowBox[{"[", 
+      RowBox[{
+       RowBox[{"-", "k"}], "-", "1"}], "]"}], "]"}], "+", 
+    RowBox[{"1", "/", 
+     RowBox[{"ContinuedFractionApproximationAux", "[", 
+      RowBox[{
+       RowBox[{"k", "-", "1"}], ",", "lst"}], "]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ContinuedFractionApproximationAux", "[", 
+     RowBox[{"0", ",", "lst_"}], "]"}], ":=", 
+    RowBox[{"lst", "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Euler", "'"}], "s", " ", "Constant"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ContinuedEuler", "[", "n_", "]"}], ":=", 
+   RowBox[{"ContinuedFractionApproximation", "[", 
+    RowBox[{"E", ",", "n"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ContinuedEuler", "[", "100", "]"}], "//", "N"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", "Pi", " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ContinuedPi", "[", "n_", "]"}], ":=", 
+   RowBox[{"ContinuedFractionApproximation", "[", 
+    RowBox[{"Pi", ",", "n"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ContinuedPi", "[", "100", "]"}], "//", "N"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Square", " ", "Root", " ", "of", " ", "2"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ContinuedRoot2", "[", "n_", "]"}], ":=", 
+   RowBox[{"ContinuedFractionApproximation", "[", 
+    RowBox[{
+     RowBox[{"\[Sqrt]", "2"}], ",", "n"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ContinuedRoot2", "[", "100", "]"}], "//", "N"}]}], "Input",
+ CellChangeTimes->{{3.7476856507567844`*^9, 3.747685758259904*^9}, {
+  3.7476857963719277`*^9, 3.74768581659801*^9}, {3.7476858482885685`*^9, 
+  3.7476858903556185`*^9}, {3.7476859219136524`*^9, 3.7476859310360947`*^9}, {
+  3.7476861632540007`*^9, 3.7476863295301566`*^9}, {3.7476864572439575`*^9, 
+  3.747686463603284*^9}, {3.7476865001966934`*^9, 3.7476865055648727`*^9}, {
+  3.7476866252035217`*^9, 3.7476867000511303`*^9}, {3.747686748675593*^9, 
+  3.747686857889819*^9}},ExpressionUUID->"6760ba2d-420d-41d0-a5ac-\
+94cf61694b60"],
+
+Cell[BoxData["2.718281828459045`"], "Output",
+ CellChangeTimes->{{3.74768663957349*^9, 3.7476867004679136`*^9}, 
+   3.7476867494826484`*^9, 3.7476867952092705`*^9, 
+   3.747686861487644*^9},ExpressionUUID->"89bcca9f-62b2-4c3d-85d0-\
+2079a55cccf3"],
+
+Cell[BoxData["3.141592653589793`"], "Output",
+ CellChangeTimes->{{3.74768663957349*^9, 3.7476867004679136`*^9}, 
+   3.7476867494826484`*^9, 3.7476867952092705`*^9, 
+   3.747686861495144*^9},ExpressionUUID->"2338802f-1690-4b39-8e67-\
+d30008d91343"],
+
+Cell[BoxData["1.414213562373095`"], "Output",
+ CellChangeTimes->{{3.74768663957349*^9, 3.7476867004679136`*^9}, 
+   3.7476867494826484`*^9, 3.7476867952092705`*^9, 
+   3.7476868614986444`*^9},ExpressionUUID->"7be3bd04-697f-4a0b-b2bb-\
+b88776e7efa8"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Let the Numbers Race!", "Subchapter",
+ CellChangeTimes->{{3.7476842882572083`*^9, 
+  3.747684293151845*^9}},ExpressionUUID->"aeed8346-03c2-49ce-811d-\
+fa649a604e02"],
+
+Cell["\<\
+Since the golden ratio is the least well-approximated irrational, let\
+\[CloseCurlyQuote]s see how it takes for it to converge compared to some \
+other famous irrational numbers.\
+\>", "Text",
+ CellChangeTimes->{{3.747685551730711*^9, 
+  3.7476855826243477`*^9}},ExpressionUUID->"912e84ea-bc37-468e-9e42-\
+037cbcbfc1bb"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Animate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"DiscretePlot", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ContinuedGoldenRatio", "[", "t", "]"}], ",", 
+       RowBox[{"ContinuedEuler", "[", "t", "]"}], ",", 
+       RowBox[{"ContinuedPi", "[", "t", "]"}], ",", 
+       RowBox[{"ContinuedRoot2", "[", "t", "]"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "n", ",", "1"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Joined", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"ImagePadding", "\[Rule]", "20"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Filling", "\[Rule]", "None"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"ExtentMarkers", "\[Rule]", 
+      RowBox[{"{", "\"\<Golden Ratio\>\"", "}"}]}]}], "\[IndentingNewLine]", 
+    "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "1", ",", "8", ",", "1"}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"AnimationRate", "\[Rule]", "1"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"AnimationRunning", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQAWIQ7Zdx8ovym9eO9Vs5voJoVY0NP0F0pHPvXxCt/thK
+QgVIe7kuVwPRKWJ79UH088VHwHRnk40JiF50MR5Mt/FX2YDo8vL3TiD6n8VC
+DxDdJXgGTAsHvvUH0UdKG4NA9Luf9hEguvJtIJieN783HkRfWvg/GURnZdbm
+gejSy3L5IHrZAdtiEH3Q7jWYThJ5WQmiz99krwHRk7h0GkD0o8xnYHrn6c5W
+EP2ppr8LRIs9+2irCvKP4BYHEC3V+MYTRDct/Ammf0eGxoDlVZ6mgGh5leUZ
+IPpvpF8+iNYL/VsMou+ZMJSAaAB6vanW
+  "],ExpressionUUID->"4e17300f-7d24-4d9b-a2ab-ed18451ed881"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 6, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`n$$], 1, 8, 1}}, Typeset`size$$ = {
+    360., {116., 122.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`n$15299$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$15299$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> DiscretePlot[{
+         $CellContext`ContinuedGoldenRatio[$CellContext`t], 
+         $CellContext`ContinuedEuler[$CellContext`t], 
+         $CellContext`ContinuedPi[$CellContext`t], 
+         $CellContext`ContinuedRoot2[$CellContext`t]}, {$CellContext`t, 
+         0, $CellContext`n$$, 1}, Joined -> True, ImagePadding -> 20, Filling -> 
+        None, ExtentMarkers -> {"Golden Ratio"}], 
+      "Specifications" :> {{$CellContext`n$$, 1, 8, 1, AnimationRate -> 1, 
+         AnimationRunning -> False, 
+         AppearanceElements -> {
+          "ProgressSlider", "PlayPauseButton", "FasterSlowerButtons", 
+           "DirectionButton"}}}, 
+      "Options" :> {
+       ControlType -> Animator, AppearanceElements -> None, DefaultBaseStyle -> 
+        "Animate", DefaultLabelStyle -> "AnimateLabel", SynchronousUpdating -> 
+        True, ShrinkingDelay -> 10.}, "DefaultOptions" :> {}],
+     ImageSizeCache->{411., {155., 161.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Animate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.747684575257963*^9, 3.747684601103331*^9}, {
+   3.747684633900943*^9, 3.7476846620496473`*^9}, 3.747684771682279*^9, 
+   3.7476848571526937`*^9, {3.7476848881362953`*^9, 3.747684899306649*^9}, {
+   3.747684935002596*^9, 3.747684948786848*^9}, {3.747684992263605*^9, 
+   3.747685012944399*^9}, 3.7476850591331935`*^9, {3.7476851242767477`*^9, 
+   3.747685174624851*^9}, 3.747685241627234*^9, {3.747685274846702*^9, 
+   3.7476852859160643`*^9}, 3.747685385051833*^9, {3.747685425532282*^9, 
+   3.747685462329378*^9}, {3.7476869192960978`*^9, 3.7476869270789294`*^9}, 
+   3.7476869924911575`*^9, {3.7476871844032927`*^9, 3.7476872087116823`*^9}, {
+   3.7476873222569485`*^9, 
+   3.7476873292979813`*^9}},ExpressionUUID->"7677f8b0-0c93-4822-bd6f-\
+e687ce1dd6ea"]
+}, Open  ]],
+
+Cell["\<\
+Not much slower, but the golden ratio takes a little longer to converge to \
+the right number.\
+\>", "Text",
+ CellChangeTimes->{{3.7476870211409063`*^9, 
+  3.747687040711898*^9}},ExpressionUUID->"1ed88598-0fed-4ace-a180-\
+ad16ad4f9b79"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Sounds from the Pisano Period", "Chapter",
+ CellChangeTimes->{{3.747523765758527*^9, 3.747523791124525*^9}, 
+   3.7476824792735295`*^9},ExpressionUUID->"1ff43e75-e2a0-4bfb-857e-\
+3ad01a88f07f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Fibonacci", " ", "Generator"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"lastIter", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FiboNext", ":=", 
+     RowBox[{"Fibonacci", "[", 
+      RowBox[{"lastIter", "++"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FiboReset", ":=", 
+     RowBox[{"lastIter", "=", "0"}]}], ";"}]}]}]], "Input",ExpressionUUID->\
+"b5409134-473a-4bd3-a92c-6cae6cd63bfa"],
+
+Cell[TextData[{
+ "The Pisano Period, denoted as \[Pi](n), is the length of the period of \
+repeating Fibonacci numbers, modulo ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ ". It turns out that \[Pi](n) is defined for all ",
+ StyleBox["n ",
+  FontSlant->"Italic"],
+ "\[Element] ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalN]", "+"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "8595743f-391d-4865-a816-0ccb36ed231c"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.7476811948779764`*^9, 3.7476812183015013`*^9}, {
+  3.7476813104139643`*^9, 3.7476813758203487`*^9}, {3.7476814612586155`*^9, 
+  3.74768146178817*^9}},ExpressionUUID->"00c3378b-c625-4fc7-9443-\
+55cfdbc97129"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"PisanoPeriod", "=", 
+    RowBox[{"{", 
+     RowBox[{
+     "1", ",", "3", ",", "8", ",", "6", ",", "20", ",", "24", ",", "16", ",", 
+      "12", ",", "24", ",", "60", ",", "10", ",", "24", ",", "28", ",", "48", 
+      ",", "40", ",", "24", ",", "36", ",", "24", ",", "18", ",", "60", ",", 
+      "16", ",", "30", ",", "48", ",", "24", ",", "100", ",", "84", ",", "72",
+       ",", "48", ",", "14", ",", "120", ",", "30", ",", "48", ",", "40", ",",
+       "36", ",", "80", ",", "24", ",", "76", ",", "18", ",", "56", ",", "60",
+       ",", "40", ",", "48", ",", "88", ",", "30", ",", "120", ",", "48", ",",
+       "32", ",", "24", ",", "112", ",", "300", ",", "72", ",", "84", ",", 
+      "108", ",", "72", ",", "20", ",", "48", ",", "72", ",", "42", ",", "58",
+       ",", "120", ",", "60", ",", "30", ",", "48", ",", "96", ",", "140", 
+      ",", "120", ",", "136"}], "}"}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"from", " ", "OEIS"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.747681387574464*^9, 3.747681446342908*^9}, {
+  3.7476814922142534`*^9, 3.7476815844689226`*^9}, {3.747681696974718*^9, 
+  3.747681762733776*^9}, {3.7476858976236725`*^9, 
+  3.7476859113204355`*^9}},ExpressionUUID->"2763a0fc-2994-4eaa-b1bb-\
+65ec04eec857"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Sound", " ", "Definitions"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"singleNoteDuration", "=", "0.5"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Cmaj", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<C\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<D\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<E\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<F\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<G\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<A\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<B\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<C5\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<D5\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<E5\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<F5\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<G5\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<A6\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<B6\>\"", ",", "singleNoteDuration"}], "]"}], ",", 
+       RowBox[{"SoundNote", "[", 
+        RowBox[{"\"\<C6\>\"", ",", "singleNoteDuration"}], "]"}]}], "}"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PlaySound", "[", "snd_", "]"}], ":=", 
+     RowBox[{"EmitSound", "[", 
+      RowBox[{"Sound", "[", "snd", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"PlayContinuousPisano", "[", 
+     RowBox[{"mod_", ",", "it_", ",", "scale_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "i", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"FiboReset", ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "0"}], ",", 
+         RowBox[{"i", "<", "it"}], ",", 
+         RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"PlaySound", "[", 
+           RowBox[{"scale", "[", 
+            RowBox[{"[", 
+             RowBox[{
+              RowBox[{"Mod", "[", 
+               RowBox[{"FiboNext", ",", "8"}], "]"}], "+", "1"}], "]"}], 
+            "]"}], "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Pause", "[", "singleNoteDuration", "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", "mod"}]}], 
+     "\[IndentingNewLine]", "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.747521363492055*^9, 3.7475213845300117`*^9}, {
+   3.7475215577164197`*^9, 3.7475215693147154`*^9}, {3.7475216032397175`*^9, 
+   3.747521628850761*^9}, {3.747521665472759*^9, 3.747521714380719*^9}, {
+   3.7475218226997566`*^9, 3.747521856573717*^9}, {3.7475219108207145`*^9, 
+   3.747522010181119*^9}, {3.7475220735493546`*^9, 3.747522075435831*^9}, {
+   3.747522109672056*^9, 3.747522143169793*^9}, {3.747522226776461*^9, 
+   3.747522250102094*^9}, {3.7475223969982977`*^9, 3.7475224246376824`*^9}, {
+   3.747522489039739*^9, 3.747522557686163*^9}, {3.747522624898497*^9, 
+   3.7475226253906145`*^9}, {3.7475227023443933`*^9, 
+   3.7475227123538203`*^9}, {3.7475228195740952`*^9, 3.747522913949127*^9}, {
+   3.7475229521955013`*^9, 3.7475229554636145`*^9}, 3.747522987321391*^9, {
+   3.747523914520523*^9, 3.7475239248425236`*^9}, {3.747524111855525*^9, 
+   3.747524182350523*^9}, {3.7475242602155247`*^9, 3.7475243632025237`*^9}, {
+   3.747525226419099*^9, 3.7475252754855556`*^9}, {3.7475256627542305`*^9, 
+   3.7475256633234787`*^9}, {3.747525696609907*^9, 3.747525704423616*^9}, {
+   3.747680940262971*^9, 3.7476809448450327`*^9}, {3.7476819185098543`*^9, 
+   3.7476819229023895`*^9}},ExpressionUUID->"460de2cb-1f6c-4bdd-b2a9-\
+229c14622ea7"],
+
+Cell[CellGroupData[{
+
+Cell["Let\[CloseCurlyQuote]s assume the C Major Scale:", "Subsubsection",
+ CellChangeTimes->{{3.747523944984524*^9, 3.747523986456526*^9}, {
+  3.747525444883659*^9, 
+  3.7475254517221193`*^9}},ExpressionUUID->"0d571b24-978f-46b3-a104-\
+4183b5f7343b"],
+
+Cell["\<\
+First, this is what the C major scale sounds like (from C4 to C5).\
+\>", "Text",
+ CellChangeTimes->{{3.747524657068102*^9, 
+  3.7475246786172075`*^9}},ExpressionUUID->"b08bcfe6-fd58-4b41-beb2-\
+084e4bdf34f6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PlaySound", "[", "Cmaj", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.747521458150975*^9, 3.747521484151816*^9}, {
+  3.747522039257124*^9, 3.7475220499313965`*^9}, {3.747522087967213*^9, 
+  3.7475220917903724`*^9}, {3.747522561770665*^9, 3.747522605952736*^9}, {
+  3.747522666968514*^9, 3.747522668699363*^9}, {3.7475227506990347`*^9, 
+  3.7475227866521287`*^9}, {3.747522918036038*^9, 3.747522920924668*^9}, {
+  3.747525304123694*^9, 
+  3.747525305558116*^9}},ExpressionUUID->"79b38a77-f47b-4c05-bf51-\
+53327888d88d"],
+
+Cell["\<\
+Now, let\[CloseCurlyQuote]s just see what the n=8 Pisano period sounds like \
+in C major:\
+\>", "Text",
+ CellChangeTimes->{{3.747523994987522*^9, 3.747524012399534*^9}, {
+  3.747524609270569*^9, 3.747524647199774*^9}, {3.747524719242077*^9, 
+  3.7475247370382767`*^9}, {3.7475247745283194`*^9, 3.7475247978086605`*^9}, {
+  3.747524838344511*^9, 
+  3.74752484010954*^9}},ExpressionUUID->"e11e4726-a507-41a0-9575-\
+2573a625aca4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PlayContinuousPisano", "[", 
+   RowBox[{"8", ",", "12", ",", "Cmaj"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.7475232285898504`*^9, 3.747523233082724*^9}, {
+   3.7475232767648277`*^9, 3.747523287022681*^9}, {3.7475233663739185`*^9, 
+   3.7475234334952106`*^9}, {3.7475234651478386`*^9, 3.747523475867425*^9}, {
+   3.7475235798721*^9, 3.7475235902163916`*^9}, {3.7475236489410877`*^9, 
+   3.7475236635720882`*^9}, {3.747524084918524*^9, 3.7475241026275244`*^9}, {
+   3.7475243959155293`*^9, 3.747524424756523*^9}, {3.747524685055793*^9, 
+   3.747524707340337*^9}, {3.7475250717805986`*^9, 3.747525083276679*^9}, 
+   3.7475253010999165`*^9, {3.747525424782114*^9, 3.747525424906106*^9}, {
+   3.7475255681284237`*^9, 3.7475255682875004`*^9}, {3.7475256806506357`*^9, 
+   3.747525689382443*^9}},ExpressionUUID->"2f536345-afaa-424e-a633-\
+bcbe8b3df6f1"],
+
+Cell["\<\
+A little clunky and awkward, but not dissonant either. However, the Pisano \
+period \[Pi](8)=12, but with other values of n, we might get more variation \
+and a longer song. We\[CloseCurlyQuote]ll try \[Pi](10)=60 (medium range of \
+notes; happens to just be the ones digits) and \[Pi](15)=40 (not that long, \
+but happens to cover two octaves + 1 note i.e. from C4 to C6).\
+\>", "Text",
+ CellChangeTimes->{{3.747524811029442*^9, 3.7475249103284497`*^9}, {
+  3.747524963486762*^9, 3.7475250158248014`*^9}, {3.7475250507170696`*^9, 
+  3.747525062024756*^9}, {3.747525099202716*^9, 3.7475251047118335`*^9}, {
+  3.747525134755993*^9, 
+  3.7475251841536536`*^9}},ExpressionUUID->"aefb162b-672c-4456-a647-\
+72e51fb07926"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"PlayContinuousPisano", "[", 
+   RowBox[{"10", ",", "60", ",", "Cmaj"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Pause", "[", "3", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PlayContinuousPisano", "[", 
+   RowBox[{"15", ",", "40", ",", "Cmaj"}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7475252826209908`*^9, 3.747525354675615*^9}, {
+  3.747525406470881*^9, 3.7475254219755507`*^9}, {3.747525552394864*^9, 
+  3.7475255595074716`*^9}},ExpressionUUID->"2dffa8fe-728e-466c-8f99-\
+e7018c483185"],
+
+Cell["\<\
+But wait! Do these  all sound really similar? (Yeah, I don\[CloseCurlyQuote]t \
+exactly know why, but they definitely sound like they\[CloseCurlyQuote]re in \
+the same \[OpenCurlyDoubleQuote]family\[CloseCurlyDoubleQuote] of tunes.)\
+\>", "Text",
+ CellChangeTimes->{{3.747525790336323*^9, 3.747525816284236*^9}, {
+  3.747680952715259*^9, 
+  3.747681076706792*^9}},ExpressionUUID->"58176c31-cce4-4725-b22a-\
+5fe53ebda640"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{759, 813},
+WindowMargins->{{616, Automatic}, {140, Automatic}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 183, 3, 96, "Title",ExpressionUUID->"ce10cc7a-29b7-455e-aed1-749444de5bcd"],
+Cell[CellGroupData[{
+Cell[788, 29, 329, 5, 67, "Chapter",ExpressionUUID->"8b58f2ae-a8e4-4cae-a13f-0a014a861d51"],
+Cell[CellGroupData[{
+Cell[1142, 38, 183, 3, 44, "Subsubsection",ExpressionUUID->"fd042a8f-165e-4239-b32f-464d1598233e"],
+Cell[CellGroupData[{
+Cell[1350, 45, 854, 19, 48, "Input",ExpressionUUID->"23129f6e-032c-4515-9989-5f391fcf9327"],
+Cell[2207, 66, 227, 4, 32, "Output",ExpressionUUID->"006680aa-c3eb-431f-8ab0-ae98d9dc2feb"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2483, 76, 204, 3, 44, "Subsubsection",ExpressionUUID->"2f877c97-6e96-4025-8b4d-5799b7e64048"],
+Cell[CellGroupData[{
+Cell[2712, 83, 2868, 75, 338, "Input",ExpressionUUID->"6760ba2d-420d-41d0-a5ac-94cf61694b60"],
+Cell[5583, 160, 247, 4, 32, "Output",ExpressionUUID->"89bcca9f-62b2-4c3d-85d0-2079a55cccf3"],
+Cell[5833, 166, 247, 4, 32, "Output",ExpressionUUID->"2338802f-1690-4b39-8e67-d30008d91343"],
+Cell[6083, 172, 249, 4, 32, "Output",ExpressionUUID->"7be3bd04-697f-4a0b-b2bb-b88776e7efa8"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6381, 182, 171, 3, 64, "Subchapter",ExpressionUUID->"aeed8346-03c2-49ce-811d-fa649a604e02"],
+Cell[6555, 187, 330, 7, 56, "Text",ExpressionUUID->"912e84ea-bc37-468e-9e42-037cbcbfc1bb"],
+Cell[CellGroupData[{
+Cell[6910, 198, 1603, 33, 219, "Input",ExpressionUUID->"4e17300f-7d24-4d9b-a2ab-ed18451ed881"],
+Cell[8516, 233, 3045, 56, 335, "Output",ExpressionUUID->"7677f8b0-0c93-4822-bd6f-e687ce1dd6ea"]
+}, Open  ]],
+Cell[11576, 292, 246, 6, 34, "Text",ExpressionUUID->"1ed88598-0fed-4ace-a180-ad16ad4f9b79"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11871, 304, 199, 3, 67, "Chapter",ExpressionUUID->"1ff43e75-e2a0-4bfb-857e-3ad01a88f07f"],
+Cell[12073, 309, 529, 15, 86, "Input",ExpressionUUID->"b5409134-473a-4bd3-a92c-6cae6cd63bfa"],
+Cell[12605, 326, 712, 19, 56, "Text",ExpressionUUID->"00c3378b-c625-4fc7-9443-55cfdbc97129"],
+Cell[13320, 347, 1295, 23, 105, "Input",ExpressionUUID->"2763a0fc-2994-4eaa-b1bb-65ec04eec857"],
+Cell[14618, 372, 4422, 89, 428, "Input",ExpressionUUID->"460de2cb-1f6c-4bdd-b2a9-229c14622ea7"],
+Cell[CellGroupData[{
+Cell[19065, 465, 250, 4, 44, "Subsubsection",ExpressionUUID->"0d571b24-978f-46b3-a104-4183b5f7343b"],
+Cell[19318, 471, 218, 5, 34, "Text",ExpressionUUID->"b08bcfe6-fd58-4b41-beb2-084e4bdf34f6"],
+Cell[19539, 478, 554, 10, 28, "Input",ExpressionUUID->"79b38a77-f47b-4c05-bf51-53327888d88d"],
+Cell[20096, 490, 437, 9, 34, "Text",ExpressionUUID->"e11e4726-a507-41a0-9575-2573a625aca4"],
+Cell[20536, 501, 890, 14, 28, "Input",ExpressionUUID->"2f536345-afaa-424e-a633-bcbe8b3df6f1"],
+Cell[21429, 517, 726, 12, 100, "Text",ExpressionUUID->"aefb162b-672c-4456-a647-72e51fb07926"],
+Cell[22158, 531, 570, 13, 67, "Input",ExpressionUUID->"2dffa8fe-728e-466c-8f99-e7018c483185"],
+Cell[22731, 546, 431, 8, 56, "Text",ExpressionUUID->"58176c31-cce4-4725-b22a-5fe53ebda640"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
