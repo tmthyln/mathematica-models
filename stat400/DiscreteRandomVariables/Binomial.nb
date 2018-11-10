@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     42839,       1144]
-NotebookOptionsPosition[     40078,       1092]
-NotebookOutlinePosition[     40427,       1107]
-CellTagsIndexPosition[     40384,       1104]
+NotebookDataLength[     51213,       1343]
+NotebookOptionsPosition[     47995,       1283]
+NotebookOutlinePosition[     48344,       1298]
+CellTagsIndexPosition[     48301,       1295]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -612,7 +612,7 @@ Cell[BoxData[
  StyleBox[
   TagBox[
    StyleBox[
-    DynamicModuleBox[{$CellContext`n$$ = 1, $CellContext`p$$ = 0.5, 
+    DynamicModuleBox[{$CellContext`n$$ = 12, $CellContext`p$$ = 0.804, 
      Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
      Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
      1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
@@ -1011,12 +1011,12 @@ Cell[BoxData[
   TagBox[
    StyleBox[
     DynamicModuleBox[{$CellContext`n$$ = 10, $CellContext`p$$ = 
-     0.8180000000000001, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+     0.5760000000000001, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
      Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
      1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
         Hold[$CellContext`n$$], 5}, 1, 100, 1}, {{
         Hold[$CellContext`p$$], 0.5}, 0, 1}}, Typeset`size$$ = {
-     540., {178., 186.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+     540., {175., 183.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
      Typeset`skipInitDone$$ = True, $CellContext`n$154206$$ = 
      0, $CellContext`p$154207$$ = 0}, 
      DynamicBox[Manipulate`ManipulateBoxes[
@@ -1065,7 +1065,7 @@ $CellContext`p$$ -
        "Specifications" :> {{{$CellContext`n$$, 5}, 1, 100, 
           1}, {{$CellContext`p$$, 0.5}, 0, 1}}, "Options" :> {}, 
        "DefaultOptions" :> {}],
-      ImageSizeCache->{612., {259., 268.}},
+      ImageSizeCache->{612., {275., 284.}},
       SingleEvaluation->True],
      Deinitialization:>None,
      DynamicModuleValues:>{},
@@ -1086,6 +1086,197 @@ $CellContext`p$$ -
    3.7508236821710434`*^9, 
    3.7508236902210903`*^9}},ExpressionUUID->"f337bf86-f61f-42bb-90a5-\
 2153148581a1"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Using Binomial Tables", "Chapter",
+ CellChangeTimes->{{3.7508773006437483`*^9, 
+  3.750877311610728*^9}},ExpressionUUID->"2f00112d-e5f6-45a5-9375-\
+1193e28c61fc"],
+
+Cell[TextData[{
+ StyleBox["Motivating Example:",
+  FontWeight->"Bold"],
+ " Suppose that 20% of all copies of a particular textbook fail a certain \
+binding strength test. Let X denote the number (among 10 randomly selected \
+copies) that fail the test. Lets say that we want to compute ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"P", "(", 
+    RowBox[{"4", "\[LessEqual]", "X", "\[LessEqual]", "7"}], ")"}], 
+   TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "6af70ad1-259f-4726-ad4f-5233ef4d79e3"],
+ ", the probability that between 4 and 7 copies fail the test (inclusive).\n\n\
+One method, since this is a discrete random variable, is to compute it as \
+follows:\n\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"P", "(", 
+     RowBox[{"4", "\[LessEqual]", "X", "\[LessEqual]", "7"}], ")"}], "=", 
+    RowBox[{
+     RowBox[{"P", "(", 
+      RowBox[{"X", "=", "4"}], ")"}], "+", 
+     RowBox[{"P", "(", 
+      RowBox[{"X", "=", "5"}], ")"}], "+", 
+     RowBox[{"P", "(", 
+      RowBox[{"X", "=", "6"}], ")"}], "+", 
+     RowBox[{"P", "(", 
+      RowBox[{"X", "=", "7"}], ")"}]}]}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "51c61ba2-084c-4023-9089-ed9de460e6fe"],
+ "\nbut this does not scale well. Instead, if we use ",
+ StyleBox["the difference between 2 values of the cdf",
+  FontSlant->"Italic"],
+ ", we only ever need to compute 2 probabilities."
+}], "Text",
+ CellChangeTimes->{{3.750877327209757*^9, 3.750877339396747*^9}, {
+  3.7508773718977194`*^9, 3.7508774018687334`*^9}, {3.750877447236722*^9, 
+  3.750877649597722*^9}, {3.7508776974805574`*^9, 3.75087773627759*^9}, {
+  3.7508778085481057`*^9, 3.750877819640945*^9}, {3.7508781523728714`*^9, 
+  3.7508781531329556`*^9}},ExpressionUUID->"226ee91e-16f6-40f7-9c1a-\
+e6b4283d95ab"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Show", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"DiscretePlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Binomial", "[", 
+          RowBox[{"10", ",", "k"}], "]"}], 
+         SuperscriptBox[".20", "k"], 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1", "-", ".20"}], ")"}], 
+          RowBox[{"10", "-", "k"}]]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "0", ",", "10"}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Filling", "\[Rule]", "Axis"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotRange", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "1"}], "}"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotTheme", "\[Rule]", "\"\<Web\>\""}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+        "PlotLabel", "\[Rule]", 
+         "\"\<Probability Mass Function (cmf) for Binomial \
+Distribution\>\""}]}], "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"DiscretePlot", "[", 
+       RowBox[{
+        RowBox[{"Sum", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Binomial", "[", 
+            RowBox[{"10", ",", "i"}], "]"}], 
+           SuperscriptBox[".20", "i"], 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"1", "-", ".20"}], ")"}], 
+            RowBox[{"10", "-", "i"}]]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "0", ",", "k"}], "}"}]}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "0", ",", "10"}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Filling", "\[Rule]", "Axis"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Joined", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotRange", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "1"}], "}"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotTheme", "\[Rule]", "\"\<Web\>\""}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+        "PlotLabel", "\[Rule]", 
+         "\"\<Probability Mass Function (cmf) for Binomial \
+Distribution\>\""}]}], "]"}]}], "\[IndentingNewLine]", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"kl", ",", "0", ",", "ku", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"ku", ",", "kl", ",", "10", ",", "1"}], "}"}]}], "]"}], "//", 
+  RowBox[{
+   RowBox[{"Magnify", "[", 
+    RowBox[{"#", ",", "1.5"}], "]"}], "&"}]}]], "Input",
+ CellChangeTimes->{{3.750878164526775*^9, 3.7508781731770754`*^9}, {
+  3.750878360393628*^9, 3.750878404720319*^9}, {3.7508784844072876`*^9, 
+  3.750878526405341*^9}, {3.7508790155183144`*^9, 3.750879158642452*^9}, {
+  3.750879206529455*^9, 3.7508793413202887`*^9}, {3.7508793717072935`*^9, 
+  3.750879377169299*^9}, {3.750879425927288*^9, 
+  3.7508794331552873`*^9}},ExpressionUUID->"08828e6f-da58-4fe8-acda-\
+a9d3a6aec869"],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[
+   StyleBox[
+    DynamicModuleBox[{$CellContext`kl$$ = 0, $CellContext`ku$$ = 
+     Dynamic[$CellContext`kl$$], Typeset`show$$ = True, 
+     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+     "\"untitled\"", Typeset`specs$$ = {{
+       Hold[$CellContext`kl$$], 0, 
+       Dynamic[$CellContext`ku$$], 1}, {
+       Hold[$CellContext`ku$$], 
+       Dynamic[$CellContext`kl$$], 10, 1}}, Typeset`size$$ = {
+     540., {181., 189.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+     Typeset`skipInitDone$$ = True, $CellContext`kl$7681$$ = 
+     0, $CellContext`ku$7682$$ = 0}, 
+     DynamicBox[Manipulate`ManipulateBoxes[
+      1, StandardForm, 
+       "Variables" :> {$CellContext`kl$$ = 0, $CellContext`ku$$ = 
+         Dynamic[$CellContext`kl$$]}, "ControllerVariables" :> {
+         Hold[$CellContext`kl$$, $CellContext`kl$7681$$, 0], 
+         Hold[$CellContext`ku$$, $CellContext`ku$7682$$, 0]}, 
+       "OtherVariables" :> {
+        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+         Typeset`specs$$, Typeset`size$$, Typeset`update$$, 
+         Typeset`initDone$$, Typeset`skipInitDone$$}, "Body" :> Show[
+         DiscretePlot[
+         Binomial[10, $CellContext`k] 
+          0.2^$CellContext`k (1 - 0.2)^(10 - $CellContext`k), {$CellContext`k,
+            0, 10}, Filling -> Axis, PlotRange -> {0, 1}, PlotTheme -> "Web", 
+          PlotLabel -> 
+          "Probability Mass Function (cmf) for Binomial Distribution"], 
+         DiscretePlot[
+          Sum[
+          Binomial[10, $CellContext`i] 
+           0.2^$CellContext`i (1 - 0.2)^(
+             10 - $CellContext`i), {$CellContext`i, 
+            0, $CellContext`k}], {$CellContext`k, 0, 10}, Filling -> Axis, 
+          Joined -> True, PlotRange -> {0, 1}, PlotTheme -> "Web", PlotLabel -> 
+          "Probability Mass Function (cmf) for Binomial Distribution"]], 
+       "Specifications" :> {{$CellContext`kl$$, 0, 
+          Dynamic[$CellContext`ku$$], 1}, {$CellContext`ku$$, 
+          Dynamic[$CellContext`kl$$], 10, 1}}, "Options" :> {}, 
+       "DefaultOptions" :> {}],
+      ImageSizeCache->{612., {262., 271.}},
+      SingleEvaluation->True],
+     Deinitialization:>None,
+     DynamicModuleValues:>{},
+     SynchronousInitialization->True,
+     UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+     UnsavedVariables:>{Typeset`initDone$$},
+     UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+    Deployed->True,
+    StripOnInput->False],
+   Manipulate`InterpretManipulate[1]],
+  StripOnInput->False,
+  Magnification->1.5 Inherited]], "Output",
+ CellChangeTimes->{
+  3.7508785282163353`*^9, 3.7508791618083005`*^9, 3.7508792505493064`*^9, {
+   3.750879349969342*^9, 3.750879378076339*^9}, 
+   3.7508794364743176`*^9},ExpressionUUID->"91d46188-183f-4432-b0f8-\
+6f4f13861342"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -1129,20 +1320,28 @@ Cell[15060, 446, 643, 21, 95, "Text",ExpressionUUID->"d807df76-aea7-4f8b-91a9-67
 Cell[15706, 469, 1956, 64, 161, "Text",ExpressionUUID->"986a30fe-9654-4a44-8197-7e78befad251"],
 Cell[CellGroupData[{
 Cell[17687, 537, 2994, 71, 265, "Input",ExpressionUUID->"78d8ff7a-4d11-47df-b2b9-c07f9a02073e"],
-Cell[20684, 610, 3134, 63, 818, "Output",ExpressionUUID->"eb7dd1ac-cfca-4f61-b960-ea66279743af"]
+Cell[20684, 610, 3137, 63, 818, "Output",ExpressionUUID->"eb7dd1ac-cfca-4f61-b960-ea66279743af"]
 }, Open  ]],
-Cell[23833, 676, 836, 24, 56, "Text",ExpressionUUID->"101ebf17-ebd5-40b9-997e-a076da3f978f"],
+Cell[23836, 676, 836, 24, 56, "Text",ExpressionUUID->"101ebf17-ebd5-40b9-997e-a076da3f978f"],
 Cell[CellGroupData[{
-Cell[24694, 704, 2931, 74, 330, "Input",ExpressionUUID->"ac257ace-7f29-41cb-9b95-7fef2ebe69d6"],
-Cell[27628, 780, 2967, 60, 552, "Output",ExpressionUUID->"b38015cf-6ad7-499f-b1e4-45a15708d101"]
+Cell[24697, 704, 2931, 74, 330, "Input",ExpressionUUID->"ac257ace-7f29-41cb-9b95-7fef2ebe69d6"],
+Cell[27631, 780, 2967, 60, 552, "Output",ExpressionUUID->"b38015cf-6ad7-499f-b1e4-45a15708d101"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[30644, 846, 170, 3, 67, "Chapter",ExpressionUUID->"7d3b0065-6cf1-4976-9ee5-c26dbd27b76d"],
-Cell[30817, 851, 1214, 35, 190, "Text",ExpressionUUID->"3e031a67-6c88-40d4-97db-4b38d2114a9f"],
+Cell[30647, 846, 170, 3, 67, "Chapter",ExpressionUUID->"7d3b0065-6cf1-4976-9ee5-c26dbd27b76d"],
+Cell[30820, 851, 1214, 35, 190, "Text",ExpressionUUID->"3e031a67-6c88-40d4-97db-4b38d2114a9f"],
 Cell[CellGroupData[{
-Cell[32056, 890, 4353, 116, 302, "Input",ExpressionUUID->"35ce26ae-cc69-4401-b4a4-330ec765cbb0"],
-Cell[36412, 1008, 3626, 79, 546, "Output",ExpressionUUID->"f337bf86-f61f-42bb-90a5-2153148581a1"]
+Cell[32059, 890, 4353, 116, 302, "Input",ExpressionUUID->"35ce26ae-cc69-4401-b4a4-330ec765cbb0"],
+Cell[36415, 1008, 3626, 79, 578, "Output",ExpressionUUID->"f337bf86-f61f-42bb-90a5-2153148581a1"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40090, 1093, 168, 3, 67, "Chapter",ExpressionUUID->"2f00112d-e5f6-45a5-9375-1193e28c61fc"],
+Cell[40261, 1098, 1795, 42, 210, "Text",ExpressionUUID->"226ee91e-16f6-40f7-9c1a-e6b4283d95ab"],
+Cell[CellGroupData[{
+Cell[42081, 1144, 2901, 70, 284, "Input",ExpressionUUID->"08828e6f-da58-4fe8-acda-a9d3a6aec869"],
+Cell[44985, 1216, 2970, 62, 552, "Output",ExpressionUUID->"91d46188-183f-4432-b0f8-6f4f13861342"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
