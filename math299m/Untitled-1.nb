@@ -1,0 +1,236 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7715,        226]
+NotebookOptionsPosition[      7320,        212]
+NotebookOutlinePosition[      7669,        227]
+CellTagsIndexPosition[      7626,        224]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "Let\[CloseCurlyQuote]s set up what our first simple model looks like. We \
+want to use a linear model to predict a single continuous output \
+(regression). For now, we\[CloseCurlyQuote]ll just try to match a set of \
+datapoints in ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "2"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "a70c4c12-ec16-430e-91ee-2d79f6d66540"],
+ " using a linear model."
+}], "Text",
+ CellChangeTimes->{{3.752635526756115*^9, 3.7526355467564025`*^9}, {
+  3.7526356563854074`*^9, 3.7526356580744143`*^9}, {3.7526356908144474`*^9, 
+  3.7526356930514016`*^9}, {3.7526357291544747`*^9, 3.7526358352654076`*^9}, {
+  3.752635874631442*^9, 
+  3.752635901526431*^9}},ExpressionUUID->"540cd080-6aa8-4683-ac6f-\
+98d20741ce20"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"\"\<training set\>\"", ":", " ", 
+    RowBox[{"we", " ", "know", " ", 
+     RowBox[{"the", " ", "'"}], 
+     RowBox[{"right", "'"}], " ", "answers", " ", "to", " ", "these"}]}], " ",
+    "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubscriptBox["X", "tr"], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", "1"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"10", ",", "5"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", "3"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"20", ",", "40"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"14", ",", "30"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"5", ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"7", ",", "7"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"13", ",", "34"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"12.5", ",", "22"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"12", ",", "23"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"11", ",", "24"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"14.5", ",", "20"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"16", ",", " ", "27"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"12.25", ",", "12"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"17", ",", "20"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"18", ",", "34"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"19", ",", "34"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"25", ",", "50"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"23", ",", "45"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"24", ",", "55"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"FindExtremum", "[", 
+      RowBox[{"lst_", ",", "f_", ",", "pos_"}], "]"}], ":=", 
+     RowBox[{"Fold", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f", "[", 
+         RowBox[{"#1", ",", 
+          RowBox[{"#2", "[", 
+           RowBox[{"[", "pos", "]"}], "]"}]}], "]"}], "&"}], ",", "0", ",", 
+       "lst"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["max", "x"], "=", 
+     RowBox[{"FindExtremum", "[", 
+      RowBox[{
+       SubscriptBox["X", "tr"], ",", "Max", ",", "1"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["max", "y"], "=", 
+     RowBox[{"FindExtremum", "[", 
+      RowBox[{
+       SubscriptBox["X", "tr"], ",", "Max", ",", "2"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["min", "x"], "=", 
+     RowBox[{"FindExtremum", "[", 
+      RowBox[{
+       SubscriptBox["X", "tr"], ",", "Min", ",", "1"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["min", "y"], "=", 
+     RowBox[{"FindExtremum", "[", 
+      RowBox[{
+       SubscriptBox["X", "tr"], ",", "Min", ",", "2"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Show", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ListPlot", "[", 
+        SubscriptBox["X", "tr"], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Plot", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"W", " ", "x"}], "+", "b"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "0", ",", 
+           SubscriptBox["max", "x"]}], "}"}]}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"W", ",", 
+         RowBox[{"RandomReal", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "0.2"}], ",", "0.2"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
+       RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"b", ",", 
+         RowBox[{"RandomReal", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "0.2"}], ",", "0.2"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
+       RowBox[{"-", "2"}], ",", "2"}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Cost", "[", "c_", "]"}], ":=", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"Length", "[", 
+        SubscriptBox["X", "tr"], "]"}], 
+       RowBox[{"-", "1"}]], "*", 
+      RowBox[{"Fold", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#1", "+", 
+          RowBox[{"c", "[", 
+           RowBox[{
+            RowBox[{"#2", "[", 
+             RowBox[{"[", "2", "]"}], "]"}], ",", 
+            RowBox[{"LinearModel", "[", 
+             RowBox[{"#2", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "]"}]}], "&"}], ",", 
+        "0", ",", 
+        SubscriptBox["X", "tr"]}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Dynamic", "[", 
+    RowBox[{"Cost", "[", "ManhattanDistance", "]"}], "]"}]}]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwdzF0oQwEABeC7pZVGwrL5WZqytAetUXYltfyU2myMPJCWbUr52S5vS0gN
+iSZs06xR85NI7UHWiqWIB3vxwmoZtSarrYi2rOae+3D6Og/niEameo1sgiCq
+6EDXnz+z9ZNQ5G3oiW1aloMtgZTsWgqzok0KHjxmF6B97H4VhswsG0xPx4Lw
+NKx6hmLVehRak9J3qJF545CQRRm13KUks6sPZiH54ufYaV0JQw1cpCx1MLxD
+yqGOGlBAwjbRAx3voVGmdxyNw+DrjAk2urwWWLIyOw8llREPLGjJeGGqtukY
+ljW3+qDvwX0Bf9Nnd1Ctlz9BZyASZn6HiCRs6OR/wbRgMt9Bu6abK4TCUrIc
+yrnFQhhjtVfDCp5WDJWqEAlTh5w2uHeb64LkslsNL4sMGsjLxfvglVnXD2+4
+n4Ow23kyDDW7SgMUfJ8boekj4IFW/ts+/AfYEAX4
+  "],
+ EmphasizeSyntaxErrors->
+  True,ExpressionUUID->"d006145f-db1c-437f-b7c9-f94ebfb0003e"]
+},
+WindowSize->{759, 833},
+WindowMargins->{{Automatic, 488}, {Automatic, 117}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 810, 17, 78, "Text",ExpressionUUID->"540cd080-6aa8-4683-ac6f-98d20741ce20"],
+Cell[1371, 39, 5945, 171, 394, "Input",ExpressionUUID->"d006145f-db1c-437f-b7c9-f94ebfb0003e"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

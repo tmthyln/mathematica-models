@@ -1,0 +1,123 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4072,        113]
+NotebookOptionsPosition[      3475,         97]
+NotebookOutlinePosition[      3824,        112]
+CellTagsIndexPosition[      3781,        109]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "From the ",
+ StyleBox["Fundamental Theorem of Calculus",
+  FontWeight->"Bold"],
+ ", we have that"
+}], "Text",
+ CellChangeTimes->{{3.7514678945170236`*^9, 
+  3.7514679098006983`*^9}},ExpressionUUID->"8420ffd1-8a07-464c-9079-\
+195776a1caf4"],
+
+Cell[BoxData[
+ RowBox[{"\t\t", 
+  RowBox[{
+   RowBox[{"F", 
+    RowBox[{"(", "x", ")"}]}], "=", 
+   RowBox[{
+    SubsuperscriptBox["\[Integral]", "0", "x"], 
+    RowBox[{"f", 
+     RowBox[{"(", "x", ")"}], 
+     RowBox[{"\[DifferentialD]", "x"}]}]}]}]}]], "DisplayFormula",
+ CellChangeTimes->{{3.7514679583368425`*^9, 3.751467967306975*^9}, {
+  3.7514693188220553`*^9, 
+  3.751469367760814*^9}},ExpressionUUID->"15434d15-4187-4e20-bb7d-\
+4f3d002f7987"],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"f", "[", "x", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"-", "10"}], ",", "10"}], "}"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"f", ",", "InputField"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7514703900390673`*^9, 3.75147039561189*^9}, {
+  3.751470467804182*^9, 3.7514704919010086`*^9}, {3.751470721034135*^9, 
+  3.751470852779516*^9}, {3.7514708899151406`*^9, 
+  3.751470899189667*^9}},ExpressionUUID->"4f4e5e7d-6d8f-415b-b79e-\
+921695cd9838"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`f$$ = $CellContext`x, Typeset`show$$ = True,
+     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`f$$]}}, Typeset`size$$ = {360., {109., 113.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`f$$ = Null}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[
+        $CellContext`f$$[$CellContext`x], {$CellContext`x, -10, 10}], 
+      "Specifications" :> {{$CellContext`f$$, ControlType -> InputField}}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{411., {152., 158.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Input",
+ CellChangeTimes->{
+  3.751470903684074*^9},ExpressionUUID->"3143d54e-17ee-4523-aacf-\
+76ec6bd78efd"]
+},
+WindowSize->{759, 833},
+WindowMargins->{{Automatic, 401}, {142, Automatic}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 257, 8, 34, "Text",ExpressionUUID->"8420ffd1-8a07-464c-9079-195776a1caf4"],
+Cell[818, 30, 452, 13, 46, "DisplayFormula",ExpressionUUID->"15434d15-4187-4e20-bb7d-4f3d002f7987"],
+Cell[1273, 45, 595, 15, 28, "Input",ExpressionUUID->"4f4e5e7d-6d8f-415b-b79e-921695cd9838"],
+Cell[1871, 62, 1600, 33, 325, InheritFromParent,ExpressionUUID->"3143d54e-17ee-4523-aacf-76ec6bd78efd"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
